@@ -1,0 +1,109 @@
+buildscript {
+	ext.kotlin_version = '1.0.6'
+	repositories {
+		jcenter()
+		mavenCentral()
+		maven {
+			name = "gradle-plugin-portal"
+			url = "https://plugins.gradle.org/m2/"
+		}
+		maven {
+			name = "forge"
+			url = "https://maven.minecraftforge.net/"
+		}
+	}
+	dependencies {
+		classpath "net.minecraftforge.gradle:ForgeGradle:${forgeGradle2}"
+		classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'kotlin'
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava {
+	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+configurations {
+	shadow
+	compile.extendsFrom(shadow)
+}
+
+repositories {
+	maven {
+		name = "forge"
+		url = "https://maven.minecraftforge.net/"
+	}
+	maven {
+		name = "lukflug"
+		url = "https://lukflug.github.io/maven/"
+	}
+	maven {
+		name = "sponge"
+		url = "https://repo.spongepowered.org/maven/"
+	}
+}
+
+minecraft {
+	mappings = project.mappings8forge
+	version = project.minecraft8forge
+	runDir = "run"
+}
+
+dependencies {
+	shadow "com.lukflug:panelstudio:${version}"
+	shadow "com.lukflug:panelstudio-mc8-forge:${versionmc}"
+	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	compile "org.spongepowered:mixin:0.8.5-SNAPSHOT"
+	annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+}
+
+group = "org.eclipse.eclipse"
+
+processResources {
+	inputs.property("version", project.version)
+	inputs.property("mcversion", project.minecraft.version)
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "mcmod.info"
+		expand "version": project.version, "mcversion": project.minecraft.version
+	}
+	from(sourceSets.main.resources.srcDirs) {
+		include "**/*"
+	}
+}
+
+shadowJar {
+	classifier = ""
+	configurations = [project.configurations.shadow]
+	relocate "com.lukflug.panelstudio", "com.lukflug.panelstudio_0_2_4"
+	manifest {
+		attributes(
+				"TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+				"MixinConfigs": "mixins.eclipse.json",
+				"FMLCorePluginContainsFMLMod": "true"
+		)
+	}
+}
+
+jar {
+	manifest {
+		attributes(
+				"TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+				"MixinConfigs": "mixins.eclipse.json",
+				"FMLCorePluginContainsFMLMod": "true"
+		)
+	}
+}
+
+reobf {
+	shadowJar {
+		mappingType = "SEARGE"
+		classpath = sourceSets.main.compileClasspath
+	}
+}

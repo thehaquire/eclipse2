@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+MixinConfigs: mixins.eclipse.json
+FMLCorePluginContainsFMLMod: true
+TweakClass: org.spongepowered.asm.launch.MixinTweaker
+Class-Path: panelstudio-0.2.4.jar panelstudio-mc8-forge-0.2.4.jar
+

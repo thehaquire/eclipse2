@@ -1,0 +1,21 @@
+Symbol range map extraction starting
+Processing 19 files
+processing org/eclipse/eclipse/ClickGUI.java
+processing org/eclipse/eclipse/Eclipse.java
+processing org/eclipse/eclipse/MixinLoader.java
+processing org/eclipse/eclipse/mixin/MinecraftMixin.java
+processing org/eclipse/eclipse/module/Category.java
+processing org/eclipse/eclipse/module/ClickGUIModule.java
+processing org/eclipse/eclipse/module/HUDEditorModule.java
+processing org/eclipse/eclipse/module/Handle.java
+processing org/eclipse/eclipse/module/Module.java
+processing org/eclipse/eclipse/setting/BooleanSetting.java
+processing org/eclipse/eclipse/setting/ColorSetting.java
+processing org/eclipse/eclipse/setting/DoubleSetting.java
+processing org/eclipse/eclipse/setting/EnumSetting.java
+processing org/eclipse/eclipse/setting/IntegerSetting.java
+processing org/eclipse/eclipse/setting/KeybindSetting.java
+processing org/eclipse/eclipse/setting/Setting.java
+processing org/eclipse/eclipse/setting/StringSetting.java
+processing org/eclipse/eclipse/theme/EclipseTheme.java
+processing org/eclipse/eclipse/util/Sender.java

@@ -1,0 +1,12 @@
+[
+	{
+		"modid": "eclipse",
+		"name": "eclipse client",
+		"description": "",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"authorList": ["haquire"],
+		"logoFile": ""
+	}
+]
